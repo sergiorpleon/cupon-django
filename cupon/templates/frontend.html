@@ -1,0 +1,45 @@
+{% extends 'base.html' %} {% block stylesheets %}
+<link rel="stylesheet" type="text/css" href="../../static/css/comun.css">
+<link rel="stylesheet" type="text/css" href="../../static/css/normalizar.css">
+<link rel="stylesheet" type="text/css" href="../../static/css/frontend.css"> {% endblock %} 
+
+{% block javascripts %}
+<script src="../../static/js/moment.js"></script>
+{% endblock %} 
+{% block body %}
+<header>
+    <h1>
+        <a href="{% url 'portada' %}">CUPON</a>
+    </h1>
+    <nav>
+        <ul>
+            <li>
+                <a href="{% url 'portada' %}">Oferta del día</a>
+            </li>
+            <li>
+                <a href="{% url 'ciudad_recientes' 'barcelona' %}">Ofertas recientes</a>
+            </li>
+            {% if user.is_authenticated %}
+            <li>
+                <a href="{% url 'compras' %}">Mis ofertas</a>
+            </li>
+            {% else %}
+            <li>
+                <a href="{% url 'usuario_login' %}">Mis ofertas</a>
+            </li>
+            {% endif %}
+
+            <li>{% include 'oferta/lista_ciudad.html' %}</li>
+        </ul>
+    </nav>
+</header>
+<article>
+    {% block article %}{% endblock %}
+</article>
+<aside>
+    {% block aside %}
+
+    {% endblock %}
+</aside>
+
+{% endblock %}

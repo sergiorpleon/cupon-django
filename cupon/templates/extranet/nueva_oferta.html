@@ -1,0 +1,18 @@
+{% extends 'extranet.html.' %}
+<div id='oferta' >
+{% block title %}Añadir una nueva oferta{% endblock %}
+{% block article %}
+<h1>Nueva Oferta</h1>
+<form action="" method="post">{% csrf_token %}
+    {# form.as_p #}
+    <table>
+            {{ form.as_table }}
+    </table>
+    
+    <input type="submit" value="Enviar">
+</form>
+{% endblock %}
+{% block aside %}
+{# ... #}
+{% endblock %}
+</div>

@@ -1,0 +1,65 @@
+{% load etiquetas %}
+
+<section class="descripcion" style="width: 66%; float: left;">
+    <h1>
+        <a href="{% url 'oferta' oferta.ciudad.slug oferta.slug %}">{{ oferta.nombre }}</a>
+    </h1>
+    {{ oferta.descripcion|listar|safe }}
+    
+    {% if oferta.fecha_expiracion|date:"Y m d"|expiracion > 0 %}
+    <a class="boton" href="{% url 'comprar' oferta.id %}">Comprar</a>
+    {% endif %}
+</section>
+<section class="galeria" style="width: 33%; float: left;">
+    <img alt="..." src="{{oferta.photo.url}}">
+    <p class="precio">{{ oferta.precio }} &euro;
+        <span>{{ oferta.descuento }}
+        </span>
+    </p>
+    <p>
+        <strong>Condiciones:</strong> {{ oferta.condiciones }}</p>
+</section>
+
+<section style="width: -webkit-fill-available; float: left;" class="estado {% if oferta.fecha_expiracion|date:'Y m d'|expiracion < 0 %}expirada{% endif %}">
+    <div style="width: 100%;">
+    {% if oferta.fecha_expiracion|date:'Y m d'|expiracion > 0 %}
+    <div class="tiempo" id="faltan" style="width: 33%; float: left;">
+        <strong>Faltan</strong>: {{ oferta.fecha_expiracion|faltan }}
+    </div>
+    <div class="compras" style="width: 33%; float: left;">
+        <strong>Compras</strong>: {{ oferta.compra }}
+    </div>
+    <div class="faltan" style="width: 33%; float: left;">
+        {% if oferta.umbral|restar:oferta.compras > 0 %} Faltan
+        <strong>{{ oferta.umbral|restar:oferta.compras }} compras</strong>
+        <br/> para activar la oferta {% else %}
+        <strong>Oferta activada</strong> por superar las
+        <strong>{{ oferta.umbral }}</strong> compras necesarias {% endif %}
+    </div>
+
+    {% else %}
+    <div class="tiempo" style="width: 33%; float: left;">
+        <strong>Finalizada</strong> el {{ oferta.fecha_expiracion }}
+    </div>
+    <div class="compras" style="width: 33%; float: left;">
+        <strong>Compras</strong>: {{ oferta.compras }}
+    </div>
+    {% endif %}
+</div>
+</section>
+
+
+
+<section class="direccion" style="width: 33%; float: left;">
+    <h2>Disfruta de la oferta en</h2>
+    <p>
+        <a href="{% url 'tienda_portada' oferta.ciudad.slug oferta.tienda.slug %}">{{ oferta.tienda.nombre }}</a>
+        {{ oferta.tienda.direccion|linebreaks }}
+    </p>
+</section>
+<section class="tienda" style="width: 66%; float: left;">
+    <h2>Sobre la tienda</h2>
+    {{ oferta.tienda.descripcion|wordwrap:40|linebreaks }}
+</section>
+
+

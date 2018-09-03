@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{% block title %}{% endblock %} | Cupon</title>
+{% block stylesheets %}
+{% endblock %}
+</head>
+<body id=""><div id="contenedor">
+{% block body %}{% endblock %}
+<footer>
+&copy; {% now 'Y' %} - Cupon 
+<a href="{% url 'ayuda' %}">Ayuda</a>
+<a href="{% url 'contacto' %}">Contacto</a>
+<a href="{% url 'privacidad' %}">Privacidad</a>
+<a href="{% url 'nosotros' %}">Sobre nosotros</a>
+</footer>
+{% block javascripts %}{% endblock %}
+</div>
+{% block scripts %}{% endblock %}
+</body>
+</html>

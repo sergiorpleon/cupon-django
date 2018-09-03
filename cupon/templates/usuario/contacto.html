@@ -1,0 +1,20 @@
+{% extends 'frontend.html.' %}
+{% block title %}Formulario de Contacto{% endblock %}
+<div id='usuario'>
+{% block article %}
+{% if form.errors %}
+     <p class="error">Lo sentimos los datos no son   
+          validos</p>
+{% endif %}
+<form action="" method="post">
+        {% csrf_token %}
+     <label for="subj">Asunto:</label>
+     <input type="text" name="subj" value="" id="subj">
+     <label for="msg">Mensaje:</label>
+     <textarea cols="40" id="msg" maxlength="500" name="msg" rows="10"></textarea>
+     <input type="submit" value="Enviar" />
+     <input type="hidden" name="next" value="{{ next|escape }}" />
+ </form>
+ {% endblock %}
+ {% block aside %}{% endblock %}
+ </div>

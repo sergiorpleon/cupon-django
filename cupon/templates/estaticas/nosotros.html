@@ -1,0 +1,21 @@
+{% extends 'frontend.html' %}
+{% block title %} Nosotros {% endblock %}
+<div id="estatica">
+    {% block article %}
+    <section id="nostros">
+        Ayuda
+    </section>
+    {% endblock %} {% block aside %}
+
+
+    <section id="login">
+        {% include 'usuario/caja_login.html' %}
+    </section>
+
+    <section id="nosotros">
+        <h2>Sobre nosotros</h2>
+        <p>Lorem ipsum dolor sit amet...</p>
+    </section>
+    {% endblock %}
+</div>
+		

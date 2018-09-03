@@ -1,0 +1,36 @@
+{% extends 'frontend.html' %}
+{% load etiquetas %}
+{% block title %}Últimas ofertas que has comprado{% endblock %}
+<div id='compras'>
+{% block article %}
+<h1>Ofertas usuario</h1>
+{% for compra in compras %}
+<section class="oferta mini">
+        <div class="descripcion">
+            <h2>
+                <a href="{% url 'oferta' compra.oferta.ciudad.slug compra.oferta.slug %}">{{ compra.oferta.nombre }}</a>
+            </h2>
+            {{ compra.oferta.descripcion|truncatewords_html:100 }}
+            <div class="estado">
+                    Comprada el {{ compra.fecha }}
+            </div>
+        </div>
+        <div class="galeria">
+            <img alt="Fotografía de la oferta" src="{{ compra.oferta.photo.url }}">
+            <p class="precio">{{ compra.oferta.precio }} &euro;
+                <span>{{ compra.oferta.precio|restar:compra.oferta.descuento }}</span>
+            </p>
+            <p>Disfruta de esta oferta en
+                <a href="{% url 'tienda_portada' compra.oferta.ciudad.slug compra.oferta.tienda.slug %}">{{ compra.oferta.tienda.nombre }}
+                </a>
+            </p>
+        </div>
+    </section>
+{% endfor %}
+{% endblock %}
+{% block aside %}
+
+
+{% include 'oferta/barra_lateral.html' %}
+{% endblock %}
+</div>

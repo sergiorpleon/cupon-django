@@ -1,0 +1,22 @@
+{% extends 'frontend.html.' %}
+{% block title %}Perfil de usuario{% endblock %}
+<div id='usuario'>
+{% block article %}
+{% if form.errors %}
+     <p class="error">Lo sentimos los datos no son   
+          validos</p>
+{% endif %}
+<form action="" method="post">
+        {% csrf_token %}
+     <label for="firstname">Nombre:</label>
+     <input type="text" name="firstname" value="{{ firstname }}" id="firstname">
+     <label for="lastname">Apellido:</label>
+     <input type="text" name="lastname" value="{{ lastname }}" id="lastname">
+     <label for="email">Correo:</label>
+     <input type="email" name="email" value="{{ email }}" id="email">
+     <input type="submit" value="Actualizar" />
+     <input type="hidden" name="next" value="{{ next|escape }}" />
+ </form>
+ {% endblock %}
+ {% block aside %}{% endblock %}
+ </div>

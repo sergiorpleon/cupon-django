@@ -1,0 +1,21 @@
+{% extends 'frontend.html' %} {% block title %}Detalles de {{ oferta.nombre }}{% endblock %}
+<div id="oferta">
+    {% block article %} {% include 'oferta/oferta.html' %} {% endblock %}
+</div>
+{% block aside %} 
+
+
+
+<section id="relacionadas">
+<h2>Ofertas en otras ciudades</h2>
+<ul>
+{% for ofertax in relacionadas %}
+<li>{{ ofertax.ciudad.nombre }}: 
+    <a href="{% url 'oferta' ofertax.ciudad.slug ofertax.slug %}">{{ ofertax.nombre}}</a>
+</li>
+{% endfor %}
+</ul>
+</section>
+
+
+{% endblock %}

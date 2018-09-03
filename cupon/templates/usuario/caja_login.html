@@ -1,0 +1,39 @@
+{% load etiquetas %}
+{% if user.is_authenticated %}
+<br/>
+<br/>
+<h2>Conectado como</h2>
+<h1>{{user.first_name}} {{user.last_name}}</h1>
+<p>
+<a href="{% url 'usuario_perfil' %}">Ver mi perfil</a>
+<a href="{% url 'usuario_logout' %}">Cerrar sesión</a>
+</p>
+{% else %}
+<a class="boton" href="{% url 'usuario_registrar' %}">Regístrate</a>
+
+<h2>Accede a tu cuenta</h2>
+{% if form.errors %}
+     <p class="error">Lo sentimos, la contraseña y el nombre de usuario no son   
+          validos</p>
+{% endif %}
+<form action="usuario/login" method="post">
+        {% csrf_token %}
+     <label for="username">User name:</label>
+     <input type="text" name="username" value="" id="username">
+     <label for="password">Password:</label>
+     <input type="password" name="password" value="" id="password">
+     <input type="submit" value="login" />
+     <input type="hidden" name="next" value="{{ next|escape }}" />
+ </form>
+ {% endif %}
+
+ {% if user.is_authenticated %}
+ {% if user.username|es_propietario %}
+ <a href="{% url 'extranet_portada' %}">Extranet</a>
+ {% endif %}
+
+ {% if user.is_superuser %}
+ {% load admin_urls %}
+<a href="{% url 'admin:index' %}">Backend</a>
+ {% endif %}
+ {% endif %}

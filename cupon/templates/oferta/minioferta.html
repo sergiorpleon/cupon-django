@@ -1,0 +1,29 @@
+{% load etiquetas %}
+<section class="oferta mini">
+    <div class="descripcion">
+        <h2>
+            <a href="{%url 'oferta' oferta.ciudad.slug oferta.slug %}">{{ oferta.nombre }}</a>
+        </h2>
+        {{ oferta.descripcion|truncatewords_html:100 }}
+        {% if oferta.fecha_expiracion|date:"Y m d"|expiracion > 0 %}
+        <a class="boton" href="{% url 'comprar' oferta.id %}">Comprar</a>
+        {% endif %}
+        <div class="estado {% if oferta.fecha_expiracion|date:'Y m d'|expiracion < 0 %}expirada{% endif %}">
+                {% if oferta.fecha_expiracion|date:"Y m d"|expiracion > 0 %}
+            <strong>Faltan</strong>: {{ oferta.fecha_expiracion }}
+            {% else %}
+            Finalizada el {{ oferta.fechaExpiracion }}
+            {% endif %}
+        </div>
+    </div>
+    <div class="galeria">
+        <img alt="Fotografía de la oferta" src="{{oferta.photo.url}}">
+        <p class="precio">{{ oferta.precio }} &euro;
+            <span>{{ oferta.precio|restar:oferta.descuento }}</span>
+        </p>
+        <p class="info">Disfruta de esta oferta en
+            <a href="{% url 'tienda_portada' oferta.ciudad.slug oferta.tienda.slug %}">{{ oferta.tienda.nombre }}
+            </a>
+        </p>
+    </div>
+</section>

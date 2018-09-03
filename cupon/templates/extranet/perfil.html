@@ -1,0 +1,10 @@
+{% extends 'extranet.html' %}
+{% block title %}Ver / Modificar mis datos{% endblock %}
+{% block article %}
+<form action="extranet/perfil" method="post">
+    <table>
+            {{ form.as_table }}
+    </table>
+<input type="submit" value="Editar perfil tienda" />
+</form>
+{% endblock %}

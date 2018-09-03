@@ -1,0 +1,20 @@
+
+    <section id="login">
+        {% include 'usuario/caja_login.html' %}
+    </section>
+    <section id="cercanas">
+        <h2>Ofertas en otras ciudades</h2>
+        <ul>
+            {% for ciudad in cercanas %}
+            <li>
+                <a href="{% url 'ciudad_recientes' ciudad.slug %}">{{ ciudad.nombre }}</a>
+            </li>
+            {% empty %}
+            <p>Esta ciudad todavía no ha publicado ninguna oferta</p>
+            {% endfor %}
+        </ul>
+    </section>
+    <section id="nosotros">
+        <h2>Sobre nosotros</h2>
+        <p>Lorem ipsum dolor sit amet...</p>
+    </section>

@@ -1,0 +1,32 @@
+{% extends 'extranet.html' %}
+{% load etiquetas %}
+<div id='oferta' >
+{% block title %}Ventas de la oferta {{ oferta.nombre }}{% endblock %}
+{% block article %}
+<h1>Ventas {{ oferta.nombre }}</h1>
+
+<table>
+<thead>
+<tr>
+<th>DNI</th>
+<th>Nombre y apellidos</th>
+<th>Fecha venta</th>
+</tr>
+</thead>
+<tbody>
+{% for venta in ventas %}
+<tr>
+<td>{{ venta.usuario.username }}</td>
+<td>{{ venta.usuario.first_name}} {{venta.usuario.last_name }}</td>
+<td>{{ venta.fecha }}</td>
+</tr>
+{% endfor %}
+<tr>
+<th>TOTAL</th>
+<td>{{ ventas|length|multiplicar:oferta.precio }} &euro;</td>
+<td>{{ ventas|length }} ventas</td>
+</tr>
+</tbody>
+</table>
+{% endblock %}
+</div>

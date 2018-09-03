@@ -1,0 +1,23 @@
+{% extends 'frontend.html' %} 
+{% load etiquetas %}
+{% block title %}Cupon, cada día ofertas increíbles en tu ciudad con descuentos de hasta el
+90% {% endblock %}
+
+    {% block article %} <div id='portada' class='oferta'>{% include 'oferta/oferta.html' %}</div> {% endblock %} 
+    {% block aside %}
+
+    {% include 'oferta/barra_lateral.html' %}
+    {% endblock %}
+    {% block scripts %}
+    <script>
+            
+    var a = moment([{{ oferta.fecha_expiracion|date:"Y" }}, {{oferta.fecha_expiracion|date:"m"}}, {{oferta.fecha_expiracion|date:"d"}}]);          
+    //var d = new Date();
+    // var d1 = moment([d.getFullYear()+"" , (d.getMonth()+1)+"" , d.getDate()+""] )
+    var b = moment([{% now "Y" %}, {% now "m"%}, {% now "d"%}]);          
+    var c = a.diff(b, 'days');
+    
+    var elem = document.getElementById("faltan");
+    elem.innerHTML = "<strong>Faltan</strong>: " + c + " días";
+    </script>
+{% endblock %}

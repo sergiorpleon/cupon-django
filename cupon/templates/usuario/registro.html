@@ -1,0 +1,12 @@
+{% extends 'frontend.html' %}
+<div id='usuario'>
+{% block title %}Regístrate gratis como usuario{% endblock %}
+{% block article %}
+<h1> Crea una cuenta de usuario</h1>
+  <form action="" method="post"> {% csrf_token %}
+      {{ form.as_p }}
+      <input type="submit" value="Crea una cuenta">
+  </form>
+{% endblock %}
+{% block aside %}{% endblock %}
+</div>
